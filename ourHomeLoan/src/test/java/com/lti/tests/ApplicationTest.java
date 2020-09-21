@@ -19,10 +19,10 @@ public class ApplicationTest {
 	public void addApplication() {
 		Application a = new Application();
 		
-		a.setFirstname("Jayanta");
+		a.setFirstname("Palash");
 		a.setMiddlename("Kr");
 		a.setLastname("Ghosh");
-		a.setEmail("jg@gmail,com");
+		a.setEmail("jg@gmail.com");
 		a.setPassword("123456");
 		a.setConfirmPassword("123456");
 		a.setPhoneNo("9988774455");
@@ -42,7 +42,11 @@ public class ApplicationTest {
 
 	}
 	
-	
+	@Test
+	public void customerLogin()
+	{
+		//write the test code for login of customer by using email and password
+	}
 	
 
 	

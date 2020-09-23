@@ -2,8 +2,8 @@ package com.lti.tests;
 
 import org.junit.Test;
 
+import com.lti.dao.AdminDao;
 import com.lti.entity.Admin;
-import com.lti.service.AdminService;
 
 public class AdminTest {
 
@@ -16,17 +16,16 @@ public class AdminTest {
 		admin.setUsername("Jay");
 		admin.setPassword("Jg123");
 		
-		AdminService as = new AdminService();
+		AdminDao ad = new AdminDao();
 		
-		System.out.println(as.registerAdmin(admin));
+		System.out.println(ad.registerAdmin(admin));
 	}
 	
 	@Test
 	public void loginAdmin() {
-		AdminService as = new AdminService();
+		AdminDao ad = new AdminDao();
 		
-		Admin ad = as.adminLogin("Jay", "Jg123");
-		System.out.println(ad.getFirstName() + "\t" + ad.getLastName());
+		Admin admin = ad.adminLogin("Jay", "Jg123");
+		System.out.println(admin.getFirstName() + "\t" + admin.getLastName());
 	}
 }
-

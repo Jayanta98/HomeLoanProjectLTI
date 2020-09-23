@@ -18,7 +18,6 @@ public class Account {
 	@SequenceGenerator(name = "accountseq", sequenceName = "account_seq", initialValue = 1000, allocationSize = 1)
 	private int accountNo;
 	
-	private int applicationId;
 	private String firstName;
 	private String middleName;
 	private String lastName;
@@ -37,12 +36,6 @@ public class Account {
 	}
 	public void setAccountNo(int accountNo) {
 		this.accountNo = accountNo;
-	}
-	public int getApplicationId() {
-		return applicationId;
-	}
-	public void setApplicationId(int applicationId) {
-		this.applicationId = applicationId;
 	}
 	public String getFirstName() {
 		return firstName;

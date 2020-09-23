@@ -15,6 +15,7 @@ import com.lti.entity.Property;
 
 
 
+
 public class ApplicationTest {
 
 	//Working fine

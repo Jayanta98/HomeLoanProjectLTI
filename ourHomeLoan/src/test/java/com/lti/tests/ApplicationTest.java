@@ -13,14 +13,13 @@ import com.lti.entity.Income;
 import com.lti.entity.Loan;
 import com.lti.entity.Property;
 
-
-
-
 public class ApplicationTest {
 
 	//Working fine
 	@Test
 	public void addApplication() {
+		GenericDao dao = new GenericDao();
+		
 		//Object Definition
 		Application a = new Application();
 		Property p= new Property();
@@ -47,6 +46,8 @@ public class ApplicationTest {
 		//not taking input from user
 		a.setApplicationStatus("Pending");
 		a.setDateOfAppointment(LocalDate.now().plusDays(5));
+		
+		a = dao.save(a);
 		
 		//Property Table
 		p.setPropertyName("Ghar");
@@ -77,7 +78,8 @@ public class ApplicationTest {
 		d.setAgreementToSale("location");
 		
 		//Account Table//has issues
-		ac.setFirstName(ac.getFirstName());
+		ac.setApplication(a);
+		ac.setFirstName(a.getFirstname());
 		ac.setMiddleName(a.getMiddlename());
 		ac.setLastName(a.getLastname());
 		ac.setAccountType("savings");
@@ -87,6 +89,7 @@ public class ApplicationTest {
 		ac.setBranchName("Mahape");
 		
 		
+		
 		//passing data through object to other tables
 		a.setProperty(p);
 		a.setIncome(i);
@@ -94,7 +97,7 @@ public class ApplicationTest {
 		a.setDocument(d);
 		a.setAccount(ac);
 		
-		GenericDao dao = new GenericDao();
+		
 		dao.save(a);	
 		
 

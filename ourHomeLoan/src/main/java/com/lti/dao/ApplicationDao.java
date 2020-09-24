@@ -24,10 +24,11 @@ import com.lti.exception.ApplicationServiceException;
 				emf = Persistence.createEntityManagerFactory("ourHomeLoan");
 				em = emf.createEntityManager();
 				
-				String jpql = "select count(a.id) from Application a where a.email =:email";
+				String jpql = "select count(a.applicationId) from Application a where a.email=:email";
 				Query q = em.createQuery(jpql);
 				q.setParameter("email", email);
 				Long count = (Long) q.getSingleResult();
+				//System.out.println(count);
 				if(count == 1)
 					return true;
 				else
@@ -48,7 +49,8 @@ import com.lti.exception.ApplicationServiceException;
 				emf = Persistence.createEntityManagerFactory("ourHomeLoan");
 				em = emf.createEntityManager();
 				
-				String jpql = "select a.id from Admin a where a.email =:email and a.password =:password";
+
+				String jpql = "select a.applicationId from Application a where a.email =:email and a.Password =:password";
 				Query q = em.createQuery(jpql);
 				q.setParameter("email", email);
 				q.setParameter("password", password);
@@ -69,6 +71,7 @@ import com.lti.exception.ApplicationServiceException;
 			if(adminExists) {
 				try {
 					int id = getApplicationId(email, password);
+				
 					Application applicant = dao.fetchById(Application.class, id);
 					return applicant;
 				}
@@ -90,9 +93,9 @@ import com.lti.exception.ApplicationServiceException;
 				emf = Persistence.createEntityManagerFactory("ourHomeLoan");
 				em = emf.createEntityManager();
 				
-				String jpql = "select a.applicationstatus from Application a where a.id =: appno";
+				String jpql = "select a.applicationStatus from Application a where a.applicationId =: x";
 				Query q = em.createQuery(jpql);
-				q.setParameter("appno", appNo);
+				q.setParameter("x", appNo);
 				String applicationstatus = (String) q.getSingleResult();
 				return applicationstatus;
 				
@@ -111,7 +114,7 @@ import com.lti.exception.ApplicationServiceException;
 					emf = Persistence.createEntityManagerFactory("ourHomeLoan");
 					em = emf.createEntityManager();
 					
-					String jpql = "select a from Account a where a.accountno =: accountNo";
+					String jpql = "select a from Account a where a.accountNo =: accountNo";
 					Query q = em.createQuery(jpql);
 					q.setParameter("accountNo", accountNo);
 					Account a = (Account) q.getSingleResult();

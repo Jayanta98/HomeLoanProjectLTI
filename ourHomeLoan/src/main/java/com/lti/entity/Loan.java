@@ -28,7 +28,17 @@ public class Loan {
 	private double emi;
 	private LocalDate startDate;
 	private LocalDate endDate;
+	private String loanStatus;
 	
+	
+	public String getLoanStatus() {
+		return loanStatus;
+	}
+
+	public void setLoanStatus(String loanStatus) {
+		this.loanStatus = loanStatus;
+	}
+
 	@OneToOne
 	@JoinColumn(name= "application_id")
 	private Application application;

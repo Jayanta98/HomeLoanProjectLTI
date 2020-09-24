@@ -24,16 +24,16 @@ public class ApplicationTest {
 		//Object Definition
 		Application a = new Application();
 		Property p= new Property();
-		Account ac= new Account();
+		
 		Income i = new Income();
 		Loan l=new Loan();
 		Document d= new Document();
 		
 		//Application table 
-		a.setFirstname("Palash");
+		a.setFirstname("Ram");
 		a.setMiddlename("Kr");
 		a.setLastname("Ghosh");
-		a.setEmail("jg@gmail.com");
+		a.setEmail("rj@gmail.com");
 		a.setPassword("123456");
 		a.setConfirmPassword("123456");
 		a.setPhoneNo("9988774455");
@@ -48,16 +48,21 @@ public class ApplicationTest {
 		a.setApplicationStatus("Pending");
 		a.setDateOfAppointment(LocalDate.now().plusDays(5));
 		
+		
 		//Property Table
 		p.setPropertyName("Ghar");
 		p.setPropertyLocation("Pune");
 		p.setEstimatedAmount(2500000);
+		
+		p.setApplication(a);//setting Application_Id in Property Table OtherWise you will get Application_Id=Null
 		
 		//Income Table
 		i.setTypeOfEmployement("Software Engineer");
 		i.setOrganizationType("Private Sector");
 		i.setEmployerName("LTI");
 		i.setRetirementAge(60);
+		
+		i.setApplication(a);//setting Application_Id in Income Table OtherWise you will get Application_Id=Null
 		
 		//Loan Table
 	    l.setMaxLoanAmount(2000000);
@@ -67,6 +72,9 @@ public class ApplicationTest {
 		l.setEmi(2000);
 		l.setStartDate(LocalDate.of(2020, 8, 1));
 		l.setEndDate(LocalDate.of(2030, 8, 1));	
+		l.setLoanStatus("Not Approved");
+		
+		l.setApplication(a);//setting Application_Id in Loan Table OtherWise you will get Application_Id=Null
 		
 		//Document Table//extract location
 		d.setPanCard("location");
@@ -76,23 +84,19 @@ public class ApplicationTest {
 		d.setNOCFromBuilder("location");
 		d.setAgreementToSale("location");
 		
-		//Account Table//has issues
-		ac.setFirstName(ac.getFirstName());
-		ac.setMiddleName(a.getMiddlename());
-		ac.setLastName(a.getLastname());
-		ac.setAccountType("savings");
-		ac.setAmount(50000);
-		ac.setIfscCode("SBIN10002");
-		ac.setBranchCode("SBI879");
-		ac.setBranchName("Mahape");
+		d.setApplication(a);//setting Application_Id in Document Table OtherWise you will get Application_Id=Null
 		
+		//Account Table// Account table should not be entered at addApplication time
+		//It should be inserted by Admin 
 		
-		//passing data through object to other tables
+	
+		
 		a.setProperty(p);
 		a.setIncome(i);
 		a.setLoan(l);
 		a.setDocument(d);
-		a.setAccount(ac);
+		
+		
 		
 		GenericDao dao = new GenericDao();
 		dao.save(a);	
@@ -123,7 +127,7 @@ public class ApplicationTest {
 	public  void seeApplicationStatus() {
 		ApplicationDao as = new ApplicationDao();
 		
-		String applicantstatus = as.applicationStatus(101);
+		String applicantstatus = as.applicationStatus(1005);
 		System.out.println(applicantstatus);
 	}
 

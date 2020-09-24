@@ -31,7 +31,7 @@ public class AdminUpdateTest {
 		ac.setBranchName("Mahape");
 		
 		GenericDao dao = new GenericDao();
-		int applicationId=1007;
+		int applicationId=10020;
 		Application application = dao.fetchById(Application.class, applicationId);
 		
 		ac.setApplication(application);

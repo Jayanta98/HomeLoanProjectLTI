@@ -13,9 +13,6 @@ import com.lti.entity.Income;
 import com.lti.entity.Loan;
 import com.lti.entity.Property;
 
-
-
-
 public class ApplicationTest {
 
 	//Working fine
@@ -42,7 +39,7 @@ public class ApplicationTest {
 		a.setNationality("Indian");
 		a.setAadharNo("11223344");
 		a.setPanNo("456321");
-		
+
 
 		//not taking input from user
 		a.setApplicationStatus("Pending");
@@ -90,12 +87,10 @@ public class ApplicationTest {
 		//It should be inserted by Admin 
 		
 	
-		
 		a.setProperty(p);
 		a.setIncome(i);
 		a.setLoan(l);
 		a.setDocument(d);
-		
 		
 		
 		GenericDao dao = new GenericDao();

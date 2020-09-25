@@ -152,10 +152,13 @@ public class AdminIncomeLoanDocViewDao {
 			Query q = em.createQuery(jpql);
 			q.setParameter("appId", appNo);
 			Loan loan = (Loan) q.getSingleResult();
-			if(loan.getLoanStatus().equals("Not Approved"))
+			if(loan.getLoanStatus().equals("Completed") || loan.getLoanStatus().equals("Rejected")) {
 				return true;
-			else
+			}
+			else {
 				return false;
+			}
+				
 		}
 		finally {
 			em.close();

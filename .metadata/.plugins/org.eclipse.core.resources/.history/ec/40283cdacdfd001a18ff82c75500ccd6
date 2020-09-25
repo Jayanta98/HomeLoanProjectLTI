@@ -1,0 +1,54 @@
+package com.lti.dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import com.lti.entity.Account;
+
+public class AdminUpdateActivityDao extends GenericDao {
+	
+	
+	
+	public void insertAccountDetailsForApplicationByAdmin( Account acc)
+	{
+			GenericDao dao = new GenericDao();
+			dao.save(acc);
+
+	}
+	
+	//Status Update by admin from pending to 
+	public void updateApplicationStatus(int appNo,String newStatus)
+	{
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		
+		
+		
+		try {
+			emf = Persistence.createEntityManagerFactory("ourHomeLoan");
+			em = emf.createEntityManager();
+			EntityTransaction tx = em.getTransaction();
+			
+			tx.begin();
+			String jpql = "update Application a set a.applicationStatus =: newStatus where a.applicationId=:appNo";
+			Query q = em.createQuery(jpql);
+			
+			q.setParameter("newStatus",newStatus );
+			q.setParameter("appNo", appNo);
+		
+		
+			 q.executeUpdate();
+			 tx.commit();
+			
+			
+		}
+		finally {
+			em.close();
+			emf.close();
+		}
+	}
+
+}

@@ -1,0 +1,93 @@
+package com.lti.dao;
+
+import java.time.LocalDate;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import com.lti.entity.Account;
+
+public class AdminUpdateActivityDao extends GenericDao {
+	
+	//Update Loan Table By Admin
+	
+	public void updateLoanDetailsByAdmin(int appNo,double emi,LocalDate startDate,LocalDate endDate)
+	{
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		
+		try {
+			emf = Persistence.createEntityManagerFactory("ourHomeLoan");
+			em = emf.createEntityManager();
+			EntityTransaction tx = em.getTransaction();
+			
+			tx.begin();
+			String jpql = "update Loan l set l.emi =: emi, l.startDate=:startDate,l.endDate=:endDate where l.application=:appNo";
+			Query q = em.createQuery(jpql);
+			
+			
+			q.setParameter("emi",emi );
+			q.setParameter("startDate",startDate );
+			q.setParameter("endDate",endDate );
+			q.setParameter("appNo", appNo);
+		
+		
+			 q.executeUpdate();
+			 tx.commit();
+			
+			
+		}
+		finally {
+			em.close();
+			emf.close();
+		}
+	}
+
+	
+	
+	
+	
+	//Inserting Account Details For Particular Application By Admin
+	public void insertAccountDetailsByAdmin( Account acc)
+	{
+			GenericDao dao = new GenericDao();
+			dao.save(acc);
+
+	}
+	
+	//Status Update by admin from pending to 
+	public void updateApplicationStatus(int appNo,String newStatus)
+	{
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		
+		
+		
+		try {
+			emf = Persistence.createEntityManagerFactory("ourHomeLoan");
+			em = emf.createEntityManager();
+			EntityTransaction tx = em.getTransaction();
+			
+			tx.begin();
+			String jpql = "update Application a set a.applicationStatus =: newStatus where a.applicationId=:appNo";
+			Query q = em.createQuery(jpql);
+			
+			q.setParameter("newStatus",newStatus );
+			q.setParameter("appNo", appNo);
+		
+		
+			 q.executeUpdate();
+			 tx.commit();
+			
+			
+		}
+		finally {
+			em.close();
+			emf.close();
+		}
+	}
+
+}

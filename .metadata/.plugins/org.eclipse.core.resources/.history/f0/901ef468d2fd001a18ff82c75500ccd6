@@ -1,0 +1,54 @@
+package com.lti.tests;
+
+import java.time.LocalDate;
+
+import org.junit.Test;
+
+import com.lti.dao.AdminUpdateActivityDao;
+import com.lti.dao.GenericDao;
+import com.lti.entity.Account;
+import com.lti.entity.Application;
+
+public class AdminUpdateTest {
+	
+	
+	
+	@Test//Working Fine
+	public void insertAccountByAdminTest()
+	{
+		AdminUpdateActivityDao adminDao= new AdminUpdateActivityDao();
+		
+		Account ac= new Account();
+		ac.setFirstName("Palash");
+		ac.setMiddleName("Kr");
+		ac.setLastName("Ghosh");
+		ac.setAccountType("savings");
+		ac.setAmount(50000);
+		ac.setIfscCode("SBIN10002");
+		ac.setBranchCode("SBI879");
+		ac.setBranchName("Mahape");
+		
+		GenericDao dao = new GenericDao();
+		int applicationId=1005;
+		Application application = dao.fetchById(Application.class, applicationId);
+		
+		ac.setApplication(application);
+		
+		adminDao.insertAccountDetailsByAdmin(ac);
+		
+	}
+	@Test //Working Fine
+	public void statusChangeByAdminTest()
+	{
+		AdminUpdateActivityDao adminUpdateDao = new AdminUpdateActivityDao();
+		adminUpdateDao.updateApplicationStatus(1005, "Approved");
+	}
+	
+	@Test
+	public void loanTableUpdateByAdminTest()
+	{
+		AdminUpdateActivityDao adminDao = new AdminUpdateActivityDao();
+		adminDao.updateLoanDetailsByAdmin(1005, 1500, LocalDate.now(), LocalDate.now().plusMonths(6));
+	}
+
+}

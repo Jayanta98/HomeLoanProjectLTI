@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.persistence.EntityTransaction"/>
+<fullyQualifiedTypeName name="com.lti.entity.Account"/>
+<fullyQualifiedTypeName name="com.lti.dao.GenericDao"/>
+<fullyQualifiedTypeName name="java.time.LocalDate"/>
+<fullyQualifiedTypeName name="com.lti.dao.AdminUpdateActivityDao"/>
+<fullyQualifiedTypeName name="org.junit.Test"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.lti.dao.AdminApplicationPropertyDao"/>
+<fullyQualifiedTypeName name="com.lti.entity.Application"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.lti.entity.Property"/>
+</qualifiedTypeNameHistroy>

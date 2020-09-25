@@ -1,0 +1,20 @@
+package com.lti.tests;
+
+public class AdminApplicationPropertyDaoTest {
+	
+	
+	
+	@Test
+	public void getListOfApplicants(){
+		
+		List<Application> applist = new ArrayList<>();
+		AdminApplicationPropertyDao dao = new AdminApplicationPropertyDao();
+		applist.addAll(dao.getApplicants());
+		for(Application a:applist) {
+			System.out.println("Name: "+a.getFirstname()+" "+a.getLastname());
+			System.out.println("Date of Appointment: "+a.getDateOfAppointment());
+			System.out.println("Application Status: "+a.getApplicationStatus());
+		}
+	}
+
+}

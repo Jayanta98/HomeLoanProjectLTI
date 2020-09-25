@@ -1,0 +1,16 @@
+package com.lti.tests;
+
+import org.junit.Test;
+
+import com.lti.dao.AdminUpdateActivityDao;
+
+public class AdminUpdateTest {
+	
+	@Test
+	public void statusChangeByAdminTest()
+	{
+		AdminUpdateActivityDao adminUpdateDao = new AdminUpdateActivityDao();
+		adminUpdateDao.updateApplicationStatus(1005, "Approved");
+	}
+
+}

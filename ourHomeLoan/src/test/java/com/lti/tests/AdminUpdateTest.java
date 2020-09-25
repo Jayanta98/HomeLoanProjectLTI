@@ -81,11 +81,21 @@ public class AdminUpdateTest {
 		adminDao.updateLoanDetailsByAdmin(1006, 1500.0, LocalDate.now(), LocalDate.now().plusMonths(6));
 	}
 	
+	
+	//LoanTableUpdateByAdmin
+		@Test
+		public void loanStatusUpdateByAdminTest()
+		{
+			AdminUpdateActivityDao adminDao = new AdminUpdateActivityDao();
+			adminDao.updateLoanStatusByAdmin(1015,"Running");
+		}
+		
+	
 	@Test //Working Fine
 	public void statusChangeByAdminTest()
 	{
 		AdminUpdateActivityDao adminUpdateDao = new AdminUpdateActivityDao();
-		adminUpdateDao.updateApplicationStatus(1006, "Approved");
+		adminUpdateDao.updateApplicationStatus(1013, "Approved");
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.lti.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -140,7 +141,7 @@ public class AdminIncomeLoanDocViewDao {
 		}
 	}
 	
-	public boolean checkLoanStatus(int appNo) {
+	public int checkLoanStatus(int appNo) {
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		
@@ -148,15 +149,18 @@ public class AdminIncomeLoanDocViewDao {
 			emf = Persistence.createEntityManagerFactory("ourHomeLoan");
 			em = emf.createEntityManager();
 			
-			String jpql = "select l from Loan l join l.application a where a.applicationId = :appId";
+			String jpql = "select l from Loan l where l.application.applicationId = :appId";
 			Query q = em.createQuery(jpql);
 			q.setParameter("appId", appNo);
 			Loan loan = (Loan) q.getSingleResult();
+			
+			System.out.println(loan.getLoanStatus());
+			System.out.println(loan.getLoanId());
 			if(loan.getLoanStatus().equals("Completed") || loan.getLoanStatus().equals("Rejected")) {
-				return true;
+				return 1;
 			}
 			else {
-				return false;
+				return 0;
 			}
 				
 		}
@@ -170,23 +174,49 @@ public class AdminIncomeLoanDocViewDao {
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		
+		
 		try {
 			emf = Persistence.createEntityManagerFactory("ourHomeLoan");
 			em = emf.createEntityManager();
 			
 			boolean status = false;
-			String jpql = "select a from Application a where a.aadharNo = :aadharNum";
+			String jpql = "select count(a.applicationId) from Application a where a.aadharNo = :aadharNo";
 			Query q = em.createQuery(jpql);
-			q.setParameter("aadharNum", aadharNo);
-			int i = q.getFirstResult();
+			q.setParameter("aadharNo", aadharNo);
+			Long i = (Long) q.getSingleResult();
+			
+			System.out.println(i);
 			if(i < 1) {
+				System.out.println("kk1");
 				return true;
+				
 			}
 			else {
-				Application application = (Application) q.getSingleResult();
-				status = checkLoanStatus(application.getApplicationId());
+				emf = Persistence.createEntityManagerFactory("ourHomeLoan");
+				em = emf.createEntityManager();
+				System.out.println("mmmm");
+				String jpql2 = "select  a from Application a where a.aadharNo =:aadharNo";
+				Query q2 = em.createQuery(jpql2);
+				q2.setParameter("aadharNo", aadharNo);
+				List<Application> applicationList = (List<Application>)q2.getResultList();
+				ArrayList<Integer> ans=new ArrayList<Integer>();
+				for(Application application:applicationList)
+				{
+					int x = checkLoanStatus(application.getApplicationId());
+					ans.add(x);
+				}
+				if(ans.contains(0))
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+					
+				
 			}
-			return status;
+			//return status;
 		}
 		finally {
 			em.close();

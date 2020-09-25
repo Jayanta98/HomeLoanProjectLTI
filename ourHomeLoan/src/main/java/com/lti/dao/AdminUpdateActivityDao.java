@@ -49,6 +49,36 @@ public class AdminUpdateActivityDao extends GenericDao {
 	}
 
 	
+	public void updateLoanStatusByAdmin(int appNo,String loanStatus)
+	{
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		
+		try {
+			emf = Persistence.createEntityManagerFactory("ourHomeLoan");
+			em = emf.createEntityManager();
+			EntityTransaction tx = em.getTransaction();
+			
+			tx.begin();
+			String jpql = "update Loan l set l.loanStatus =:loanStatus where l.application.applicationId=:appNo";
+			Query q = em.createQuery(jpql);
+			
+			
+			q.setParameter("loanStatus",loanStatus );
+			q.setParameter("appNo", appNo);
+	
+			 q.executeUpdate();
+			 tx.commit();
+			
+			
+		}
+		finally {
+			em.close();
+			emf.close();
+		}
+	}
+
+	
 	
 	
 	

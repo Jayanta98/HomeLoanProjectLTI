@@ -27,10 +27,10 @@ public class ApplicationTest {
 		Document d= new Document();
 		
 		//Application table 
-		a.setFirstname("Ram");
+		a.setFirstname("Shyam");
 		a.setMiddlename("Kr");
 		a.setLastname("Ghosh");
-		a.setEmail("rj@gmail.com");
+		a.setEmail("new@gmail.com");
 		a.setPassword("123456");
 		a.setConfirmPassword("123456");
 		a.setPhoneNo("9988774455");
@@ -69,7 +69,7 @@ public class ApplicationTest {
 		l.setEmi(2000);
 		l.setStartDate(LocalDate.of(2020, 8, 1));
 		l.setEndDate(LocalDate.of(2030, 8, 1));	
-		l.setLoanStatus("Not Approved");
+		l.setLoanStatus("Apply");
 		
 		l.setApplication(a);//setting Application_Id in Loan Table OtherWise you will get Application_Id=Null
 		
